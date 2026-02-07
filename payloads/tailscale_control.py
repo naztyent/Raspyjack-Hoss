@@ -69,11 +69,8 @@ import RPi.GPIO as GPIO  # type: ignore
 import LCD_1in44, LCD_Config  # type: ignore
 from PIL import Image, ImageDraw, ImageFont  # type: ignore
 
-# Optional WebUI virtual input bridge
-try:
-    import rj_input  # type: ignore
-except Exception:
-    rj_input = None
+# Shared input helper (WebUI virtual + GPIO)
+from payloads._input_helper import get_button
 
 WIDTH, HEIGHT = 128, 128
 
@@ -165,31 +162,6 @@ def draw_error(lcd, title, lines):
     d.text((2, 115), "KEY3 exit", font=font, fill="white")
     lcd.LCD_ShowImage(img, 0, 0)
 
-def _get_virtual_button():
-    if rj_input is None:
-        return None
-    name = rj_input.get_virtual_button()
-    mapping = {
-        "KEY1_PIN": "KEY1",
-        "KEY2_PIN": "KEY2",
-        "KEY3_PIN": "KEY3",
-    }
-    return mapping.get(name)
-
-def get_button():
-    v = _get_virtual_button()
-    if v:
-        return v
-    for name, pin in PINS.items():
-        if GPIO.input(pin) == 0:
-            return name
-    return None
-
-def wait_release(button):
-    if button in PINS:
-        while GPIO.input(PINS[button]) == 0:
-            time.sleep(0.03)
-
 
 def main():
     LCD_Config.GPIO_Init()
@@ -207,7 +179,9 @@ def main():
             "Error",
             ["Tailscale missing", "Download:", "tailscale.com"],
         )
-        while GPIO.input(PINS["KEY3"]) != 0:
+        while True:
+            if get_button({"KEY3": PINS["KEY3"]}, GPIO) == "KEY3":
+                break
             time.sleep(0.1)
         lcd.LCD_Clear()
         GPIO.cleanup()
@@ -218,7 +192,7 @@ def main():
 
     try:
         while True:
-            btn = get_button()
+            btn = get_button(PINS, GPIO)
             if btn == "KEY3":
                 break
 
@@ -232,7 +206,7 @@ def main():
                 else:
                     last_msg = "tailscale missing"
                 last_msg_at = time.time()
-                wait_release("KEY1")
+                time.sleep(0.25)
 
             if btn == "KEY2":
                 if _tailscale_installed():
@@ -242,7 +216,7 @@ def main():
                 else:
                     last_msg = "tailscale missing"
                 last_msg_at = time.time()
-                wait_release("KEY2")
+                time.sleep(0.25)
 
             lines = [
                 f"daemon: {'on' if _daemon_running() else 'off'}",
