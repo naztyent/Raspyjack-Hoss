@@ -94,6 +94,66 @@ select:focus {
   min-height: 32px;
 }
 
+/* Parity PR3: spacing + line-height + icon sizing */
+body {
+  line-height: 1.45;
+}
+
+h1, h2, h3,
+.text-lg,
+.text-sm.font-black {
+  line-height: 1.2;
+}
+
+.text-xs,
+.text-\[11px\],
+.text-\[10px\] {
+  line-height: 1.35;
+}
+
+button i,
+a i {
+  font-size: 0.85em;
+  vertical-align: middle;
+}
+
+/* Normalize section paddings for both screens */
+main > section,
+#settingsTab > div,
+#lootTab > div,
+#leftPanel {
+  border-radius: 14px;
+}
+
+#settingsTab > div,
+#lootTab > div {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+/* Keep status rows and top bars rhythmically aligned */
+header,
+#deviceTab .terminal-wrap > .flex,
+main section > .px-4.py-2,
+#leftPanel > .px-3.py-2 {
+  min-height: 44px;
+}
+
+/* Small-screen parity: same breathing room on both pages */
+@media (max-width: 768px) {
+  body {
+    line-height: 1.42;
+  }
+  .text-xs,
+  .text-\[11px\],
+  .text-\[10px\] {
+    line-height: 1.32;
+  }
+  main > section {
+    margin-bottom: 0.6rem;
+  }
+}
+
 /* Shared typography cues */
 #sidebar .text-lg,
 header .text-sm.font-black {
