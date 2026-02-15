@@ -286,6 +286,23 @@ main,
   background: rgba(30,41,59,0.68) !important;
 }
 
+/* Look-match PR3: shell bar and section structure parity */
+main > .flex.items-center.justify-between.mb-4.md\:mb-6 {
+  box-shadow: var(--rj-parity-shadow);
+}
+
+#deviceTab .terminal-wrap > .flex.items-center.justify-between,
+#settingsTab .flex.items-center.justify-between,
+#lootTab .flex.items-center.justify-between {
+  background: rgba(2, 6, 23, 0.34);
+}
+
+#payloadSidebar > div,
+#lootList,
+#treeContainer {
+  border-radius: 10px;
+}
+
 #deviceShell.theme-neon,
 #deviceShell[data-theme="neon"] {
   filter: saturate(0.92) brightness(0.98);
