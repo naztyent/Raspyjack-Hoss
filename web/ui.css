@@ -42,6 +42,58 @@ a.ide-toolbar-btn {
   box-shadow: var(--rj-parity-glow);
 }
 
+/* Shared nav sizing */
+#sidebar nav > button,
+#sidebar nav > a {
+  min-height: 40px;
+  font-weight: 600;
+}
+
+/* Shared modal visual language */
+#lootPreview > div > div,
+#authModal > div > div,
+#entryModal > div > div,
+#renameModal > div > div,
+#deleteModal > div > div,
+#wizardModal > div > div,
+#templateModal > div > div {
+  border-radius: 16px !important;
+  border-color: var(--rj-parity-border) !important;
+  box-shadow: 0 18px 38px rgba(2, 6, 23, 0.5) !important;
+}
+
+/* Shared input treatment */
+input,
+textarea,
+select {
+  border-color: var(--rj-parity-border) !important;
+  border-radius: 10px !important;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(16,185,129,.55) !important;
+  box-shadow: 0 0 0 1px rgba(16,185,129,.4), var(--rj-parity-glow) !important;
+}
+
+/* Status placement consistency */
+#ideStatus,
+#wsStatus,
+#payloadStatus,
+#systemStatus,
+#shellStatus,
+#settingsStatus,
+#lootStatus {
+  font-weight: 600;
+  font-size: 11px;
+}
+
+/* Action clusters look tighter and consistent */
+.flex.items-center.gap-2 > button,
+.flex.items-center.gap-3 > button {
+  min-height: 32px;
+}
+
 /* Shared typography cues */
 #sidebar .text-lg,
 header .text-sm.font-black {
