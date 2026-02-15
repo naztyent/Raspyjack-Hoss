@@ -267,3 +267,26 @@ main,
 #deviceShell {
   box-shadow: 0 16px 34px rgba(2,6,23,0.42) !important;
 }
+
+/* Look-match PR2: icon and chroma harmonization */
+#sidebar nav i,
+#menuToggle i,
+#logoutBtn i {
+  width: 14px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+#sidebar nav > button,
+#sidebar nav > a {
+  background: rgba(15,23,42,0.5) !important;
+}
+#sidebar nav > button:hover,
+#sidebar nav > a:hover {
+  background: rgba(30,41,59,0.68) !important;
+}
+
+#deviceShell.theme-neon,
+#deviceShell[data-theme="neon"] {
+  filter: saturate(0.92) brightness(0.98);
+}
