@@ -580,6 +580,7 @@
 
   function setNavActive(btn, active){
     if (!btn) return;
+    btn.classList.toggle('nav-active', active);
     btn.classList.toggle('bg-emerald-500/10', active);
     btn.classList.toggle('text-emerald-300', active);
     btn.classList.toggle('border-emerald-400/30', active);

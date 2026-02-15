@@ -391,6 +391,44 @@
       font-weight: 500;
       letter-spacing: 0.015em;
     }
+
+    #sidebar nav > button,
+    #sidebar nav > a {
+      position: relative;
+      overflow: hidden;
+    }
+    #sidebar nav > .nav-active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 3px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #34d399, #10b981);
+      box-shadow: 0 0 12px rgba(16,185,129,.55);
+    }
+
+    #deviceTab .terminal-wrap,
+    #deviceShell,
+    #settingsTab > div,
+    #lootTab > div {
+      border-radius: 16px;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+      #deviceTab .terminal-body {
+        height: 250px;
+      }
+      #deviceShell {
+        transform: scale(.96);
+        transform-origin: top center;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen text-slate-200">
