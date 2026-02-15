@@ -500,15 +500,37 @@
   let systemOpen = false;
   let wsAuthenticated = true;
 
+  function applyStatusTone(el, txt){
+    if (!el) return;
+    const s = String(txt || '').toLowerCase();
+    el.classList.remove('status-tone-ok', 'status-tone-warn', 'status-tone-bad');
+    if (/connected|authenticated|ready|live|saved|configured|launched|running/.test(s)) {
+      el.classList.add('status-tone-ok');
+    } else if (/loading|connecting|opening|reconnecting|stopping/.test(s)) {
+      el.classList.add('status-tone-warn');
+    } else if (/failed|unavailable|disconnected|error|denied/.test(s)) {
+      el.classList.add('status-tone-bad');
+    }
+  }
+
   function setStatus(txt){
-    if (statusEl) statusEl.textContent = txt;
+    if (statusEl) {
+      statusEl.textContent = txt;
+      applyStatusTone(statusEl, txt);
+    }
     if (statusEls && statusEls.length) {
-      statusEls.forEach(el => { el.textContent = txt; });
+      statusEls.forEach(el => {
+        el.textContent = txt;
+        applyStatusTone(el, txt);
+      });
     }
   }
 
   function setPayloadStatus(txt){
-    if (payloadStatus) payloadStatus.textContent = txt;
+    if (payloadStatus) {
+      payloadStatus.textContent = txt;
+      applyStatusTone(payloadStatus, txt);
+    }
     if (payloadStatusDot){
       const active = /running|starting|stopping|launched/i.test(String(txt || ''));
       payloadStatusDot.classList.toggle('running', active);
@@ -516,15 +538,24 @@
   }
 
   function setSystemStatus(txt){
-    if (systemStatus) systemStatus.textContent = txt;
+    if (systemStatus) {
+      systemStatus.textContent = txt;
+      applyStatusTone(systemStatus, txt);
+    }
   }
 
   function setShellStatus(txt){
-    if (shellStatusEl) shellStatusEl.textContent = txt;
+    if (shellStatusEl) {
+      shellStatusEl.textContent = txt;
+      applyStatusTone(shellStatusEl, txt);
+    }
   }
 
   function setSettingsStatus(txt){
-    if (settingsStatus) settingsStatus.textContent = txt;
+    if (settingsStatus) {
+      settingsStatus.textContent = txt;
+      applyStatusTone(settingsStatus, txt);
+    }
   }
 
   // Handheld themes (frontend-only)

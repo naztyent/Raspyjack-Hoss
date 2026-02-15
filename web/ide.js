@@ -75,8 +75,24 @@
   const resizeHandle = document.getElementById('resizeHandle');
 
   // ------------------------ Helpers ------------------------
+  function applyStatusTone(el, txt){
+    if (!el) return;
+    const s = String(txt || '').toLowerCase();
+    el.classList.remove('status-tone-ok', 'status-tone-warn', 'status-tone-bad');
+    if (/connected|authenticated|ready|saved|launched|active|ok/.test(s)) {
+      el.classList.add('status-tone-ok');
+    } else if (/loading|connecting|starting|running|reconnecting/.test(s)) {
+      el.classList.add('status-tone-warn');
+    } else if (/failed|error|denied|disconnected/.test(s)) {
+      el.classList.add('status-tone-bad');
+    }
+  }
+
   function setIdeStatus(text){
-    if (ideStatusEl) ideStatusEl.textContent = text;
+    if (ideStatusEl) {
+      ideStatusEl.textContent = text;
+      applyStatusTone(ideStatusEl, text);
+    }
   }
 
   function getSearchParams(){
@@ -1270,7 +1286,10 @@
   let wsAuthenticated = true;
 
   function setWsStatus(text){
-    if (wsStatusEl) wsStatusEl.textContent = text;
+    if (wsStatusEl) {
+      wsStatusEl.textContent = text;
+      applyStatusTone(wsStatusEl, text);
+    }
   }
 
   function setupHiDPI(){
