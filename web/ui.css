@@ -1,0 +1,80 @@
+:root {
+  --rj-parity-bg: linear-gradient(180deg, rgba(2, 6, 23, 0.72), rgba(2, 6, 23, 0.5));
+  --rj-parity-surface: rgba(15, 23, 42, 0.46);
+  --rj-parity-surface-strong: rgba(15, 23, 42, 0.62);
+  --rj-parity-border: rgba(148, 163, 184, 0.2);
+  --rj-parity-border-strong: rgba(148, 163, 184, 0.32);
+  --rj-parity-radius: 12px;
+  --rj-parity-shadow: 0 14px 30px rgba(2, 6, 23, 0.35);
+  --rj-parity-glow: 0 0 20px rgba(16, 185, 129, 0.12);
+}
+
+/* Shared shell feel */
+#sidebar,
+header {
+  background: var(--rj-parity-bg) !important;
+  border-color: var(--rj-parity-border) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Shared panel chrome */
+#settingsTab > div,
+#lootTab > div,
+#leftPanel,
+.editor-body,
+main > section {
+  border-color: var(--rj-parity-border) !important;
+  box-shadow: var(--rj-parity-shadow);
+}
+
+/* Shared control appearance */
+button,
+a.ide-toolbar-btn {
+  border-radius: var(--rj-parity-radius);
+}
+
+#saveBtn,
+#runBtn,
+#shellConnect,
+#discordWebhookSave,
+#newFileBtn,
+#restartUiBtn {
+  box-shadow: var(--rj-parity-glow);
+}
+
+/* Shared typography cues */
+#sidebar .text-lg,
+header .text-sm.font-black {
+  letter-spacing: 0.06em;
+}
+
+#sidebar .text-\[11px\],
+header .text-\[10px\],
+#ideStatus,
+#wsStatus,
+#payloadStatus,
+#systemStatus,
+#shellStatus {
+  letter-spacing: 0.02em;
+}
+
+/* Layout parity */
+@media (min-width: 1024px) {
+  #deviceTab > .flex {
+    gap: 1.25rem;
+  }
+  #leftPanel {
+    min-width: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  #menuToggle,
+  #logoutBtn {
+    min-height: 2.25rem;
+  }
+}
